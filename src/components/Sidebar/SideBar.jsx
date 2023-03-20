@@ -21,6 +21,7 @@ import FileSelector from '../DragandDrop/FileSelector';
 import BottomNavbar from '../BottomNav/BottomNavbar';
 import { useSelector } from 'react-redux';
 import MapChannels from '../Channels/MapChannels';
+import PreviewConfig from '../PreviewConfig/PreviewConfig';
 
 const drawerWidth = 280;
 
@@ -147,6 +148,7 @@ function ResponsiveDrawer(props) {
                     <HorizontalStepper />
                     {montage.currentStep ===0 && <FileSelector />}
                     {montage.currentStep ===1  && <MapChannels/>}
+                    {montage.currentStep ===2 && <PreviewConfig/>}
                     <BottomNavbar />
                 </Box>
             </Box>
