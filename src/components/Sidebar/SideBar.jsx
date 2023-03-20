@@ -53,7 +53,7 @@ function ResponsiveDrawer(props) {
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding sx={{ my: 1 }}>
-                <ListItemButton>
+                <ListItemButton  sx={{ backgroundColor: "#0F4662" }}>
                     <ListItemIcon >
                         <NoteAddOutlinedIcon style={{ color: 'white' }} />
                     </ListItemIcon>
@@ -65,7 +65,7 @@ function ResponsiveDrawer(props) {
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding sx={{ my: 1 }}>
-                <ListItemButton sx={{ backgroundColor: "#0F4662" }}>
+                <ListItemButton>
                     <ListItemIcon>
                         <GIIcon.GiTwoCoins style={{ color: 'white' }} />
                     </ListItemIcon>

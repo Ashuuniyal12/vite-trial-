@@ -1,10 +1,12 @@
 import { Box, Typography ,Button} from '@mui/material'
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch  } from 'react-redux';
 import demmoData from '../../data/demo.json'
+import {showPageTwo} from '../../features/montages/MontagesSlice';
 
 const PreviewConfig = () => {
 
+    const dispatch = useDispatch();
     const montage = useSelector((state) => state.montage.selectedOption);
     return (
         <div>
@@ -40,10 +42,10 @@ const PreviewConfig = () => {
                             </Typography>
                             <Typography variant="p" sx={{ color: '#0F0F0F', fontFamily: "DM Sans", fontSize: "18px", fontWeight: '400', textTransform: 'capitalize' }} >{montage[item]?.refrencebackup || "NULL"}
                             </Typography>
-                            <Button variant='outlined' component="span" 
-            sx={{ backgroundColor: 'white', color: "#2F7EC7", px: '55px', py: "15px", mt: "20px", border: "1px solid #2F7EC7" }}>
-            <Typography variant="p" sx={{ color: '#2F7EC7', fontFamily: "DM Sans", fontSize: "14px", fontWeight: '400', textTransform: 'capitalize' }} >Edit Channel</Typography>
-          </Button>
+                            <Button variant='outlined' component="span" onClick={() => { dispatch(showPageTwo())}}
+                                sx={{ backgroundColor: 'white', color: "#2F7EC7", px: '55px', py: "15px", mt: "20px", border: "1px solid #2F7EC7" }}>
+                            <Typography variant="p" sx={{ color: '#2F7EC7', fontFamily: "DM Sans", fontSize: "14px", fontWeight: '400', textTransform: 'capitalize' }} >Edit Channel</Typography>
+                            </Button>
                          
                     </Box>
                 </>)

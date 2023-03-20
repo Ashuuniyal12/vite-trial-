@@ -37,6 +37,9 @@ export const MontageSlice = createSlice({
       if(state.currentStep > 0){
       state.currentStep -= 1;}
     },
+    showPageTwo: (state) =>{
+      state.currentStep =1;
+    },
     clearData: (state) => {
       console.log("Called clearData");
       state.data.edf = null
@@ -53,6 +56,6 @@ export const MontageSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { edfUploadReq, incrementCount, decrementCount, clearData,setOptions ,setBackupReq} = MontageSlice.actions
+export const { showPageTwo,edfUploadReq, incrementCount, decrementCount, clearData,setOptions ,setBackupReq} = MontageSlice.actions
 
 export default MontageSlice.reducer
