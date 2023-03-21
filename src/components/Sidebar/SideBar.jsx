@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Box} from '@mui/material';
+import { Box, Alert } from '@mui/material'
+import CheckCircleIcon from '@mui/icons-material/Check';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
@@ -14,19 +15,22 @@ import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import *as RxIcon from 'react-icons/rx';
 import *as GIIcon from 'react-icons/gi';
 import *as FaIcon from 'react-icons/fa';
-import *as RiIcon from  'react-icons/ri';
+import *as RiIcon from 'react-icons/ri';
 
 import HorizontalStepper from '../Stepper/Stepper';
 import FileSelector from '../DragandDrop/FileSelector';
 import BottomNavbar from '../BottomNav/BottomNavbar';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch} from 'react-redux';
 import MapChannels from '../Channels/MapChannels';
+import { incrementCount } from '../../features/montages/MontagesSlice';
 import PreviewConfig from '../PreviewConfig/PreviewConfig';
 
 const drawerWidth = 280;
 
 function ResponsiveDrawer(props) {
+    const dispatch = useDispatch();
     const montage = useSelector(state => state.montage);
+    const currentStep = useSelector(state => state.montage.currentStep);
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -53,7 +57,7 @@ function ResponsiveDrawer(props) {
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding sx={{ my: 1 }}>
-                <ListItemButton  sx={{ backgroundColor: "#0F4662" }}>
+                <ListItemButton sx={{ backgroundColor: "#0F4662" }}>
                     <ListItemIcon >
                         <NoteAddOutlinedIcon style={{ color: 'white' }} />
                     </ListItemIcon>
@@ -132,24 +136,30 @@ function ResponsiveDrawer(props) {
                     component="main"
                     sx={{ flexGrow: 1, p: 1, backgroundColor: '#F5F6FA', ml: { sm: `${drawerWidth}px` } }}
                 >
-                    <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between",width: "100%" }}>
-                        <Typography variant="permanent" color="black" fontFamily="DM Sans" fontWeight="700" fontSize="28px"  sx={{ m: 4, }}>
+                    <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
+                        <Typography variant="permanent" color="black" fontFamily="DM Sans" fontWeight="700" fontSize="28px" sx={{ m: 4, }}>
                             Oura_Study
                         </Typography>
-                        <Box sx={{ display: "flex", flexDirection: "row" , alignItems: "center" ,mr:2}}>
-                            <FaIcon.FaUserCircle style={{ color:"#2CA9E3",fontSize: '28px', margin: '20px' }} />
+                        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", mr: 2 }}>
+                            <FaIcon.FaUserCircle style={{ color: "#2CA9E3", fontSize: '28px', margin: '20px' }} />
                             <Typography fontFamily="DM Sans" fontWeight="500" fontSize="16px">Ankit Brijwasi</Typography>
-                            <RiIcon.RiArrowDropDownLine  style={{ color:"black",fontSize: '28px',}}/>
+                            <RiIcon.RiArrowDropDownLine style={{ color: "black", fontSize: '28px', }} />
                         </Box>
 
                     </Box>
 
+                    {montage.currentStep == 3 && 
+                    <Alert  width="50%" icon={<CheckCircleIcon fontSize="inherit" />} onClose={ () => { dispatch(incrementCount())}}severity="success">
+                       Channels Configured
+                    </Alert>}
 
                     <HorizontalStepper />
-                    {montage.currentStep ===0 && <FileSelector />}
-                    {montage.currentStep ===1  && <MapChannels/>}
-                    {montage.currentStep ===2 && <PreviewConfig/>}
-                    <BottomNavbar />
+                    {montage.currentStep === 0 && <FileSelector />}
+                    {montage.currentStep === 1 && <MapChannels />}
+                    {montage.currentStep === 2 && <PreviewConfig />}
+                    {montage.currentStep === 3 && <PreviewConfig />}
+                    {montage.currentStep === 4 && <PreviewConfig />}
+                    {(montage.currentStep != 3 && montage.currentStep != 4) && <BottomNavbar />}
                 </Box>
             </Box>
         </>
