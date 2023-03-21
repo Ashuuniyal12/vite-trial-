@@ -24,6 +24,8 @@ export default function BottomNavbar() {
   const dispatch = useDispatch();
 
   const montage = useSelector((state) => state.montage.data);
+  const currrentStep = useSelector((state) => state.montage.currentStep);
+  const btnColor = currrentStep == 2 ? '#10A44B' : '#2F7EC7';
   console.log(montage.edf===null)
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -51,13 +53,13 @@ export default function BottomNavbar() {
         </Box>
 
         <Box sx={{ mr: 2 }}>
-          <Button variant='contained' component="span" disabled={montage.edf === null} onClick={() => { dispatch(incrementCount())}}
+          <Button variant='contained' component="span" disabled={montage.edf === null} onClick={() => { dispatch(incrementCount())} } backgroundColor="green"
             sx={{
-              backgroundColor: '#2F7EC7', color: "white", alignItems: "end", justifyItems: "end", px: '55px', py: "15px", mt: "20px", "&.Mui-disabled": {
+              backgroundColor: btnColor , color: "white", alignItems: "end", justifyItems: "end", px: '55px', py: "15px", mt: "20px", "&.Mui-disabled": {
                 background: "#9BC4EA",
               }
             }}>
-            <Typography variant="p" sx={{ color: 'white', fontFamily: "DM Sans", fontSize: "14px", fontWeight: '500', textTransform: 'capitalize' }} >Next</Typography>
+            <Typography variant="p" sx={{ color: 'white', fontFamily: "DM Sans", fontSize: "14px", fontWeight: '500', textTransform: 'capitalize' }} >{currrentStep === 2 ?"Save":"Next"}</Typography>
           </Button>
         </Box>
       </Box>
