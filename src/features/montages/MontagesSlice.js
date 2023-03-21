@@ -28,7 +28,7 @@ export const MontageSlice = createSlice({
     },
     incrementCount: (state) => {
       console.log("Called incrementCount");
-      if (state.currentStep <= 2) {
+      if (state.currentStep <= 3) {
         state.currentStep += 1;
       }
     },
