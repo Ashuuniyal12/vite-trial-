@@ -159,5 +159,4 @@ const PreviewConfig = () => {
         </div>
     )
 }
-
 export default PreviewConfig
